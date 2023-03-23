@@ -7,7 +7,7 @@ E-Commerce website
 
 3. Once you are in the project directory, create a new virtual environment using the python -m venv command followed by the name you want to give your environment. For example, to create an environment named myenv, you can use the following command: python -m venv myenv
 
-4.Activate the virtual environment using the appropriate command for your operating system:
+4. Activate the virtual environment using the appropriate command for your operating system:
   Windows: myenv\Scripts\activate
   Linux or macOS: source myenv/bin/activate
     When the virtual environment is activated, you should see the name of the environment in your command prompt or terminal.
