@@ -30,6 +30,7 @@ E-Commerce website
     django = ''
   
   Assessment_3/CRUD-Assessmet-3/my_ecommerce_site/my_ecommerce_site/settings.py
+    
     from pathlib import Path
     import os # <-------------------------------------------------------------- added for password security
     from dotenv import load_dotenv # <----------------------------------------- added for password security
