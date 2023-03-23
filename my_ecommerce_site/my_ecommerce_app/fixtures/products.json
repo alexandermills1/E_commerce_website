@@ -1,0 +1,32 @@
+[
+    {
+        "model":"my_ecommerce_app.Product",
+        "pk": 1,
+        "fields":{
+            "title": "Lettuce",
+            "quantity": 11,
+            "price": 1.97,
+            "categories": [2,3]
+        }
+    },
+    {
+        "model":"my_ecommerce_app.Product",
+        "pk": 2,
+        "fields":{
+            "title": "Berries",
+            "quantity": 12,
+            "price": 3.98,
+            "categories": [2,3]
+        }
+    },
+    {
+        "model":"my_ecommerce_app.Product",
+        "pk": 3,
+        "fields":{
+            "title": "Steak",
+            "quantity": 13,
+            "price": 11.99,
+            "categories": [1,3]
+        }
+    }
+]

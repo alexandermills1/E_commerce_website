@@ -1,0 +1,39 @@
+{% extends "pages/layout.html" %}
+
+{% block content %}
+    <h2>Products</h2>
+{% for product in products %}
+
+    <div class="product-container">
+    <div class="product-card">
+    <img src="..." class="card-img-top" alt="...">
+        <div class="card-body product-card">
+            {% if nested %}
+                <h5 class="card-title"><a href='/product/{{product.product.id}}/'>{{product.product.title}}</a></h5>
+                {% for category in product.category %}
+                    <h6><a href="/category/{{category.id}}/">{{category.title}}</a></h6>
+                {% endfor %}
+                <p class="card-text">Left in stock: {{product.product.quantity}}</p>
+                <p class="card-text">$ {{product.product.price}}</p>
+                
+                <button class="btn btn-primary" onclick = "alterProductQuantity({{product.product.id}}, {{product.product.quantity}}, 'A')">++ stock</button>
+                <button class="btn btn-primary"onclick = "addToCart({{product.product.id}}, {{product.product.quantity}}, 'S')">add to cart</button>
+                {% comment %} <a href="#" class="btn btn-primary" onclick="addToCart({{ product.id }})">nothing</a> {% endcomment %}
+                <button class="btn btn-primary" onclick = "deleteProduct({{product.product.id}})">Delete</button>
+            {% else %}
+                <h5 class="card-title"><a href='/product/{{product.id}}/'>{{product.title}}</a></h5>
+                <p class="card-text">Left in stock: {{product.quantity}}</p>
+                <p class="card-text">$ {{product.price}}</p>
+                <button class="btn btn-primary" onclick = "alterProductQuantity({{product.id}}, {{product.quantity}}, 'A')">++ stock</button>
+                <button class="btn btn-primary" onclick = "addToCart({{product.id}}, {{product.quantity}}, 'S')">add to cart</button>
+                {% comment %} <a href="#" class="btn btn-primary" onclick="addToCart({{ product.id }})">nothing</a> {% endcomment %}
+                <button class="btn btn-primary" onclick = "deleteProduct({{product.id}})">Delete</button>
+            {% endif %}
+            {% comment %} <a href="#" class="btn btn-primary">Add to Cart</a> {% endcomment %}
+        </div>
+    </div>
+    </div>
+
+{% endfor %}
+
+{% endblock content %}

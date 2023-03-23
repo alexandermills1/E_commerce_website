@@ -1,0 +1,23 @@
+[
+    {
+        "model":"my_ecommerce_app.Category",
+        "pk": 1,
+        "fields":{
+            "title": "Carnivorous"
+        }
+    },
+    {
+        "model":"my_ecommerce_app.Category",
+        "pk": 2,
+        "fields":{
+            "title": "Herbivorous"
+        }
+    },
+    {
+        "model":"my_ecommerce_app.Category",
+        "pk": 3,
+        "fields":{
+            "title": "Omnivorous"
+        }
+    }
+]
