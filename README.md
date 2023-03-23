@@ -1,6 +1,16 @@
 # CRUD-Assessmet-3
 E-Commerce website 
 
+Incomplete items:
+  Search functionality
+  Website visual stying needs work (CSS)
+  Website functionality
+    Ability to add items to Shopping Cart persisted to the database
+    Ability to retrieve Shopping Cart items from the database, and present them on the front end
+    Ability to see item quantities aggregated and total order price in Shopping Cart
+
+
+# Start up
 1. Open your terminal or command prompt.
 
 2. Navigate to the directory where your Python project is located. For example, you can use the cd command to change directories: cd path/to/project
