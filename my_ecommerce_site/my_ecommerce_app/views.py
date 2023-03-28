@@ -3,7 +3,7 @@ from .models import *
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 # * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 *
@@ -16,20 +16,52 @@ def cart(request):
     print(cart_items_list)
     return render(request, 'pages/cart.html', {'cart_items': cart_items})
 
+
+# @csrf_exempt
+# def create_cart_item(request):
+#     if request.method == 'POST':
+#         title_id = request.POST.get('title')
+#         quantity = request.POST.get('quantity')
+#         if not title_id or not quantity:
+#             return JsonResponse({'success': False, 'message': 'Invalid request'})
+#         try:
+#             title = Product.objects.get(id=title_id)
+#         except Product.DoesNotExist:
+#             return JsonResponse({'success': False, 'message': 'Invalid product'})
+#         cart_item = CartItem.objects.create(title=title, quantity=quantity)
+#         return JsonResponse({'success': True, 'cart_item_id': cart_item.id})
+#     return JsonResponse({'success': False, 'message': 'Invalid request'})
+
 @csrf_exempt
+@require_POST
 def create_cart_item(request):
-    if request.method == 'POST':
-        title_id = request.POST.get('title')
-        quantity = request.POST.get('quantity')
-        if not title_id or not quantity:
-            return JsonResponse({'success': False, 'message': 'Invalid request'})
-        try:
-            title = Product.objects.get(id=title_id)
-        except Product.DoesNotExist:
-            return JsonResponse({'success': False, 'message': 'Invalid product'})
-        cart_item = CartItem.objects.create(title=title, quantity=quantity)
-        return JsonResponse({'success': True, 'cart_item_id': cart_item.id})
-    return JsonResponse({'success': False, 'message': 'Invalid request'})
+    data = json.loads(request.body)
+    product_id = data.get('product_id')
+    decrement_quantity = data.get('decrement_quantity', False)
+
+    if not product_id:
+        return JsonResponse({'success': False, 'message': 'Product ID is required'})
+
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return JsonResponse({'success': False, 'message': 'Product not found'})
+
+    if decrement_quantity and product.quantity > 0:
+        product.quantity -= 1
+        product.save()
+
+    cart_item, created = CartItem.objects.get_or_create(
+        title=product,
+        defaults={'total_price': product.price}
+    )
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.update_total_price()
+
+    return JsonResponse({'success': True, 'message': 'Product added to cart'})
+
 
 # * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 * * 8 *
 

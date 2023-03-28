@@ -1,17 +1,32 @@
 {% extends "pages/layout.html" %}
 
 {% block content %}
-    <h2>Cart</h2>
-    {% if cart_items %}
-        <ul>
+  <div class="container">
+    <h1>Shopping Cart</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for item in cart_items %}
-            <li>{{ item }}</li>
+        <tr>
+          <td>{{ item.title }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product_price }}</td>
+          <td>{{ item.total_price }}</td>
+        </tr>
         {% endfor %}
-        </ul>
-    
-    {% else %}
-        <p>Your cart is empty.</p>
-    
-    {% endif %}
-
-{% endblock content %}
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-md-6 offset-md-6">
+        <h4 class="text-right">Total: {{ cart_total }}</h4>
+      </div>
+    </div>
+  </div>
+{% endblock %}

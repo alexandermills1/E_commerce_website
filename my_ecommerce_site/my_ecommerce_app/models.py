@@ -24,8 +24,21 @@ class CartItem(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     is_cart_total = models.BooleanField(default=False)
 
+    # def update_total_price(self):
+    #     self.total_price = self.product.price * self.quantity
+    #     self.save()
+
+    # def __str__(self):
+    #     if self.is_cart_total:
+    #         return f"Cart total: {self.total_price}"
+    #     else:
+    #         return f"{self.title.title} x {self.quantity}"
+    @property
+    def product_price(self):
+        return self.title.price
+
     def update_total_price(self):
-        self.total_price = self.product.price * self.quantity
+        self.total_price = self.title.price * self.quantity
         self.save()
 
     def __str__(self):
